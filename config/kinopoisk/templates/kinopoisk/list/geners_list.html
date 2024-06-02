@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<h1 class="text-center">{{title}}</h1>
+<div class=" container flex-wrap mw-700px mx-auto gap-2">
+    {% for genre in genres %}
+        <a href="" class="
+        btn text-decoration-none px-3 fs-5 py-2 btn-outline-info rounded-3  disable-tap-select hover-scale-4">
+            {{genre.name|title}}
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}

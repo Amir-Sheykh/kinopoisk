@@ -1,0 +1,52 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <header>
+        <h1 style="margin-left: 288px; margin-top: 30px;">Личный кабинет</h1>
+    </header>
+    <div class="container">
+        <div class="profile fs-5" style="border: 2px;">
+            <h2>Профиль</h2>
+            <p><strong>Имя: </strong>{{user.first_name}}</p>
+            <p><strong>Фамилия: </strong>{{user.last_name}}</p>
+            <p><strong>Email: </strong>{{user.email}}</p>
+            <p><strong>Дата регистрации: </strong>{{user.date_joined}}</p>
+        </div>
+        <h2 style="text-align: center;">Любимые фильмы</h2>
+    <div class="d-flex justify-content-start gap-2 my-3 bg-black rounded-2 p-3">
+        {% for movie in user.favourite_movies.all %}
+        <a href="{% url 'movie_detail' movie_id=movie.id %}" class="text-decoration-none"></a>
+        <div style="max-height: 80vh; " class="text-align-center ">
+            <h4>{{movie.title}}</h4>
+            <img src="{{movie.poster.url}}" alt="" style="height: 400px;">
+        </div>
+        {% endfor %}
+    </div>
+    <div>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Редактировать профиль
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <form method="post" class="d-flex flex-column gap-2" action="">
+                        {% csrf_token %}
+                        <input name="first_name" class="form-control" type="text" placeholder="Введите другое имя">
+                        <input name="last_name" class="form-control" type="text" placeholder="Введите другую фамилию">
+                        <input name="email" class="form-control" type="text" placeholder="Введите другую почту">
+                        <button type="submit" class="btn-outline-info w-25 mx-auto d-block">Отправить изменения</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    </div>
+    
+{% endblock %}

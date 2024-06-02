@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+
+{% block title %}Об актере{% endblock %}
+
+{% block content %}
+<body>
+
+    <div class="container mt-5">
+      <div class="card actor-card">
+        <img src="{{person.photo.url}}" class="card-img-top actor-img" alt="Actor Image">
+        <div class="card-body">
+          <h5 class="card-title">{{person.name}}</h5>
+          <ul class="card-text">
+            <li>День рождения:{{person.birth_date}}</li>
+            <li>Жанры:</li>
+            <li>Лучшие фильмы:</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Подробнее</a>
+        </div>
+      </div>
+    </div>
+    
+    </body>
+{% endblock %}

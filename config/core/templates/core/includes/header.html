@@ -1,0 +1,61 @@
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+          <a class="navbar-brand" href="#">Kinopoisk</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Главное</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'movies_list' %}">Фильмы</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'geners_list' %}">Жанры</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'actors_list' person_role='actor' %}">Актёры</a>
+              </li>
+            </ul>
+            <!-- <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> -->
+            <p>{{request.user.is.is_authenticated}}</p>
+            <p>{{error}}</p>
+            <ul>
+              {% if request.user.is_authenticated %}
+                <li><a class="bnt btn-outline-dark" href="{% url 'profile' %}">Личный кабинет</a></li>
+                <li><a class="bnt btn-outline-dark" href="{% url 'signout' %}">Выйти</a></li>
+              {% else %}
+                <li><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signin" href="">Войти</a></li>
+                <li><a class="bnt btn-outline-dark" href="">Зарегестрироваться</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+            <div class="modal fade" id="signin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="{% url 'signin' %}" class="d-flex flex-column gap-2" method="post">
+                      {% csrf_token %}
+                      <input class="form-control" type="text" placeholder="Введите логин:" name="username" required>
+                      <!-- <input class="form-control" type="email" placeholder="Введите почту:" name="email" required> -->
+                      <input class="form-control" type="password" placeholder="Введите пароль:" name="password" required>
+                      <button class="btn btn-outline-dark d-block mx-auto w-50" type="submit">подтвердить</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+</header>
